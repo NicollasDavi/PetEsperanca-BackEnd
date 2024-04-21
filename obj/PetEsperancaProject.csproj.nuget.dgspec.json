@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nicollas\\Desktop\\PetSolution\\PetEsperancaProject\\PetEsperancaProject.csproj": {}
+    "C:\\_ws\\ProjetoPetEsperanca\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nicollas\\Desktop\\PetSolution\\PetEsperancaProject\\PetEsperancaProject.csproj": {
+    "C:\\_ws\\ProjetoPetEsperanca\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nicollas\\Desktop\\PetSolution\\PetEsperancaProject\\PetEsperancaProject.csproj",
+        "projectUniqueName": "C:\\_ws\\ProjetoPetEsperanca\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
         "projectName": "PetEsperancaProject",
-        "projectPath": "C:\\Users\\nicollas\\Desktop\\PetSolution\\PetEsperancaProject\\PetEsperancaProject.csproj",
-        "packagesPath": "C:\\Users\\nicollas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nicollas\\Desktop\\PetSolution\\PetEsperancaProject\\obj\\",
+        "projectPath": "C:\\_ws\\ProjetoPetEsperanca\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
+        "packagesPath": "C:\\Users\\glinc\\.nuget\\packages\\",
+        "outputPath": "C:\\_ws\\ProjetoPetEsperanca\\PetEsperanca-BackEnd\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\nicollas\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\glinc\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,6 +42,18 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -63,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
