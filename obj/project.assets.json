@@ -2534,24 +2534,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\glinc\\.nuget\\packages\\": {}
+    "C:\\Users\\nicollas\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\_ws\\ProjetoPetEsperanca\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
+      "projectUniqueName": "C:\\Users\\nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
       "projectName": "PetEsperancaProject",
-      "projectPath": "C:\\_ws\\ProjetoPetEsperanca\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
-      "packagesPath": "C:\\Users\\glinc\\.nuget\\packages\\",
-      "outputPath": "C:\\_ws\\ProjetoPetEsperanca\\PetEsperanca-BackEnd\\obj\\",
+      "projectPath": "C:\\Users\\nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
+      "packagesPath": "C:\\Users\\nicollas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\glinc\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\nicollas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2605,7 +2607,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
