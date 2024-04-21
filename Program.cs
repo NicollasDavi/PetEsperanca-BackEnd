@@ -3,9 +3,10 @@ using PetEsperanca.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
 
 builder.Services.AddDbContext<AppDbContext>();
+
+var app = builder.Build();
 
 app.MapPost("/cadastro", ([FromBody]User user, [FromServices]AppDbContext context) =>{
    
@@ -24,7 +25,9 @@ app.MapPost("/cadastro", ([FromBody]User user, [FromServices]AppDbContext contex
     
 
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/usuario", ( [FromServices]AppDbContext context) => {
+    return Results.Ok(context.Users.ToList());
+});
 
 app.Run();
 
