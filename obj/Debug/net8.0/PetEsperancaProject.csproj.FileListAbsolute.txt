@@ -244,3 +244,8 @@ C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\obj\Debug\net8.0\refint\
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\obj\Debug\net8.0\PetEsperancaProject.pdb
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\obj\Debug\net8.0\PetEsperancaProject.genruntimeconfig.cache
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\obj\Debug\net8.0\ref\PetEsperancaProject.dll
+C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\obj\Debug\net8.0\PetEsperancaProject.MvcApplicationPartsAssemblyInfo.cs
