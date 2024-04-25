@@ -10,8 +10,8 @@ using PetEsperanca.Models;
 namespace PetEsperancaProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240421201036_requireds")]
-    partial class requireds
+    [Migration("20240425125028_Ongs")]
+    partial class Ongs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,18 +25,20 @@ namespace PetEsperancaProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Cnpj")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Cpf")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(5)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -46,7 +48,25 @@ namespace PetEsperancaProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("PetEsperanca.Models.Ong", b =>
+                {
+                    b.HasBaseType("PetEsperanca.Models.User");
+
+                    b.Property<string>("Cnpj")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OngName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasDiscriminator().HasValue("Ong");
                 });
 #pragma warning restore 612, 618
         }
