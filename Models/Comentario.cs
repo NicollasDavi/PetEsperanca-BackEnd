@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PetEsperanca.Models
 {
@@ -9,6 +10,7 @@ namespace PetEsperanca.Models
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "O Id da ONG é obrigatório.")]
+        [ForeignKey("OngId")]
         public Guid OngId { get; set; }
 
         [Required(ErrorMessage = "O Id do usuário é obrigatório.")]
