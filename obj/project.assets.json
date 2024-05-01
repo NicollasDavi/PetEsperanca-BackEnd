@@ -2747,11 +2747,16 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\Marti\\.nuget\\packages\\": {}
+=======
+    "C:\\Users\\glinc\\.nuget\\packages\\": {}
+>>>>>>> f7b791cf8dfe63df3ed335dcd233a0ab960fd203
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Marti\\Desktop\\petGit\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
       "projectName": "PetEsperancaProject",
       "projectPath": "C:\\Users\\Marti\\Desktop\\petGit\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
@@ -2761,12 +2766,21 @@
       "configFilePaths": [
         "C:\\Users\\Marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+=======
+      "projectUniqueName": "C:\\_ws\\ProjetoPetEsperanca\\PetEsperanca-BackEnd\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
+      "projectName": "PetEsperancaProject",
+      "projectPath": "C:\\_ws\\ProjetoPetEsperanca\\PetEsperanca-BackEnd\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
+      "packagesPath": "C:\\Users\\glinc\\.nuget\\packages\\",
+      "outputPath": "C:\\_ws\\ProjetoPetEsperanca\\PetEsperanca-BackEnd\\PetEsperanca-BackEnd\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\glinc\\AppData\\Roaming\\NuGet\\NuGet.Config"
+>>>>>>> f7b791cf8dfe63df3ed335dcd233a0ab960fd203
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2824,7 +2838,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+>>>>>>> f7b791cf8dfe63df3ed335dcd233a0ab960fd203
       }
     }
   }
