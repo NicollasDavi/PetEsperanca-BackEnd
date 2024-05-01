@@ -139,25 +139,92 @@ app.MapDelete("/comment/{id}", ([FromRoute] int id, [FromServices] AppDbContext 
 
 //Incio das rotas de Events
 
-app.MapPost("/event" , ([FromBody] User user, [FromServices] AppDbContext context) => {
+app.MapPost("/event" , async ([FromBody] Ong ong, [FromServices] AppDbContext context) => {
+     try
+    {
+        context.Ong.Add(ong);
+        context.SaveChanges();
+        return Results.Created($"/event/{ong.Id}", ong);
+    }
+    catch (Exception ex)
+    {
+        
+        throw new Exception($"Erro ao criar evento: {ex.Message}");
+    }
     
 });
 
-app.MapGet("/event/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
+app.MapGet("/event/{nome}", ([FromRoute] string nome, [FromServices] AppDbContext context) => {
 
+    var evento = context.Eventos.FirstOrDefault(e => e.Nome == nome);
+
+    if (evento == null)
+    {
+        return Results.NotFound();
+    }
+
+        return Results.Ok(evento);
+    
 });
 
-app.MapPatch("/event/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
+app.MapPatch("/event/{id}", async ([FromRoute] Guid id, [FromBody] Evento updatedEvent, [FromServices] AppDbContext context) =>
+{
+    var evento = await context.Eventos.FindAsync(id);
+    
+    if (evento == null)
+    {
+        return Results.NotFound();
+    }
 
+    evento.Nome = updatedEvent.Nome;
+    evento.DataInicio = updatedEvent.DataInicio;
+    evento.Objetivo = updatedEvent.Objetivo;
+    evento.ValorDesejado = updatedEvent.ValorDesejado;
+    evento.ValorAlcancado = updatedEvent.ValorAlcancado;
+    evento.NumeroDeDoacoes = updatedEvent.NumeroDeDoacao;
+
+    await context.SaveChangesAsync();
+
+    return Results.Ok(evento);
 });
 
-app.MapPut("/event/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) => {
 
+app.MapPut("/event/{id}", async ([FromRoute] int id, [FromBody] Evento updatedEvent, [FromServices] AppDbContext context) =>
+{
+    var evento = await context.Eventos.FindAsync(id);
+
+    if (evento == null)
+    {
+        return Results.NotFound();
+    }
+
+    evento.Nome = updatedEvent.Nome;
+    evento.DataInicio = updatedEvent.DataInicio;
+    evento.Objetivo = updatedEvent.Objetivo;
+    evento.ValorDesejado = updatedEvent.ValorDesejado;
+    evento.ValorAlcancado = updatedEvent.ValorAlcancado;
+    evento.NumeroDeDoacoes = updatedEvent.NumeroDeDoacao;
+
+    await context.SaveChangesAsync();
+
+    return Results.Ok(evento);
 });
 
-app.MapDelete("/event/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) =>{
+app.MapDelete("/event/{id}", async ([FromRoute] int id, [FromServices] AppDbContext context) =>
+{
+    var evento = await context.Eventos.FindAsync(id);
 
+    if (evento == null)
+    {
+        return Results.NotFound();
+    }
+
+    context.Eventos.Remove(evento);
+    await context.SaveChangesAsync();
+
+    return Results.NoContent();
 });
+
 
 //Fim das rotas de Events
 
