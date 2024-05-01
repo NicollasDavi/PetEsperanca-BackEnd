@@ -26,9 +26,4 @@ public class Endereco
         Id = id;
     }
     
-    // Construtor vazio
-    public Endereco()
-    {
-        
-    }
 }
