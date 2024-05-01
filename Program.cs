@@ -99,11 +99,13 @@ app.MapPost("/sigin/user" , ([FromBody] User user, [FromServices] AppDbContext c
     
 });
 
-app.MapGet("/user/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) => {
+app.MapGet("/user/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
 
 });
 
-app.MapPatch("/us")
+app.MapPatch("/user/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
+
+});
 
 app.MapPut("/user/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) => {
 
@@ -115,6 +117,73 @@ app.MapDelete("/user/{id}", ([FromRoute] int id, [FromServices] AppDbContext con
 
 //Fim das Rotas de User
 
+//Inicio das rotas de Comment
+
+app.MapPost("/comment" , ([FromBody] User user, [FromServices] AppDbContext context) => {
+    
+});
+
+app.MapGet("/comment/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
+
+});
+
+app.MapPut("/comment/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) => {
+
+});
+
+app.MapDelete("/comment/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) =>{
+
+});
+
+//Fim das rotas de Comment
+
+//Incio das rotas de Events
+
+app.MapPost("/event" , ([FromBody] User user, [FromServices] AppDbContext context) => {
+    
+});
+
+app.MapGet("/event/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
+
+});
+
+app.MapPatch("/event/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
+
+});
+
+app.MapPut("/event/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) => {
+
+});
+
+app.MapDelete("/event/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) =>{
+
+});
+
+//Fim das rotas de Events
+
+//Incio das rotas de Voluntario
+
+app.MapPost("/voluntario" , ([FromBody] User user, [FromServices] AppDbContext context) => {
+    
+});
+
+app.MapGet("/voluntario/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
+
+});
+
+app.MapPatch("/voluntario/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
+
+});
+
+app.MapPut("/voluntario/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) => {
+
+});
+
+app.MapDelete("/voluntario/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) =>{
+
+});
+
+//Fim das rotas de Voluntario
 
 
 app.Run();
