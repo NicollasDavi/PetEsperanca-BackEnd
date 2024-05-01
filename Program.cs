@@ -103,6 +103,8 @@ app.MapGet("/user/{id}", ([FromRoute] int id, [FromServices] AppDbContext contex
 
 });
 
+app.MapPatch("/us")
+
 app.MapPut("/user/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) => {
 
 });
