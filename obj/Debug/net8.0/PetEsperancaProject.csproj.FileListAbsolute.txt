@@ -248,4 +248,4 @@ C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\bin\Debug\net8.0\Swashbu
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\obj\Debug\net8.0\PetEsperancaProject.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Nicollas\Documents\GitHub\PetEsperanca-BackEnd\obj\Debug\net8.0\PetEsperancaProject.csproj.CopyComplete
+C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\obj\Debug\net8.0\PetEsper.38F2E84F.Up2Date
