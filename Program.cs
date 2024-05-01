@@ -44,9 +44,9 @@ app.MapPost("/signin", ([FromBody]Ong ong,[FromServices] AppDbContext context) =
     }
 });
 
-app.MapPut("/ong/update/{id}", ([FromRoute] int id, [FromBody] Ong newOng, [FromServices] AppDbContext context) =>
+app.MapPut("/ong/update/{id}", ([FromRoute] Guid id, [FromBody] Ong newOng, [FromServices] AppDbContext context) =>
 {
-    Ong? ong = context.Ong.FirstOrDefault(ong => ong.Id == id);
+    Ong? ong = context.Ong.FirstOrDefault(x => x.Id == id);
 
     if (ong is null)
     {
@@ -70,7 +70,7 @@ app.MapPut("/ong/update/{id}", ([FromRoute] int id, [FromBody] Ong newOng, [From
     }
 });
 
-app.MapDelete("/ong/delete/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) =>
+app.MapDelete("/ong/delete/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) =>
 {
     Ong? ong = context.Ong.FirstOrDefault(x => x.Id == id);
 
