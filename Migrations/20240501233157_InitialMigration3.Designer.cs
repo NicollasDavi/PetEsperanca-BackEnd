@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetEsperanca.Models;
 
@@ -10,9 +11,11 @@ using PetEsperanca.Models;
 namespace PetEsperancaProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240501233157_InitialMigration3")]
+    partial class InitialMigration3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
@@ -30,7 +33,7 @@ namespace PetEsperancaProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("OngId")
+                    b.Property<Guid?>("OngId")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("UserId")
@@ -189,11 +192,11 @@ namespace PetEsperancaProject.Migrations
 
             modelBuilder.Entity("PetEsperanca.Models.Comentario", b =>
                 {
-                    b.HasOne("PetEsperanca.Models.Ong", null)
+                    b.HasOne("PetEsperanca.Models.Ong", "Ong")
                         .WithMany("Comentario")
-                        .HasForeignKey("OngId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OngId");
+
+                    b.Navigation("Ong");
                 });
 
             modelBuilder.Entity("PetEsperanca.Models.Ong", b =>

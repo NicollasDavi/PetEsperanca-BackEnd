@@ -56,11 +56,11 @@ app.MapPatch("/ong/update/{id}", ([FromRoute] Guid id, [FromBody] Ong newOng, [F
 
     try
     {
-        ong.Name = newOng.Name ?? ong.Name;
-        ong.Cnpj = newOng.Cnpj ?? ong.Cnpj;
-        ong.Tel = newOng.Tel ?? ong.Tel;
-        ong.Cpf = newOng.Cpf ?? ong.Cpf;
-        ong.Email = newOng.Email ?? ong.Email;
+        // ong.Name = newOng.Name ?? ong.Name;
+        // ong.Cnpj = newOng.Cnpj ?? ong.Cnpj;
+        // ong.Tel = newOng.Tel ?? ong.Tel;
+        // ong.Cpf = newOng.Cpf ?? ong.Cpf;
+        // ong.Email = newOng.Email ?? ong.Email;
         ong.OngName = newOng.OngName ?? ong.OngName;
         context.SaveChanges();
         return Results.Ok(ong);
@@ -124,18 +124,15 @@ app.MapPost("/comment/{ongId}", ([FromRoute] Guid ongId, [FromBody] Comentario c
 {
     try
     {
-        var ong = context.Ong.FirstOrDefault(x => x.OngId == ongId);
+        Ong? ong = context.Ong.FirstOrDefault(x => x.Id == ongId);
         if (ong == null)
         {
             return Results.NotFound("ONG não encontrada.");
         }
 
         comment.OngId = ongId;
-
         context.Comment.Add(comment);
-        
         context.SaveChanges();
-        
         return Results.Created("", comment);
     }
     catch (Exception)
