@@ -120,56 +120,55 @@ app.MapDelete("/user/{id}", ([FromRoute] int id, [FromServices] AppDbContext con
 
 //Inicio das rotas de Comment
 
-app.MapPost("/comment" , ([FromBody] Comentario comment, [FromServices] AppDbContext context) => {
+app.MapPost("/comment/{ongId}", ([FromRoute] Guid ongId, [FromBody] Comentario comment, [FromServices] AppDbContext context) =>
+{
     try
     {
+        var ong = context.Ong.FirstOrDefault(x => x.OngId == ongId);
+        if (ong == null)
+        {
+            return Results.NotFound("ONG não encontrada.");
+        }
+
+        comment.OngId = ongId;
+
         context.Comment.Add(comment);
+        
         context.SaveChanges();
+        
         return Results.Created("", comment);
     }
     catch (Exception)
     {
-        throw new Exception("Erro");
+        throw new Exception("Erro ao adicionar o comentário.");
     }
 });
 
+
 app.MapGet("/comments/{ongId}", ([FromRoute] Guid ongId, [FromServices] AppDbContext context) => {
-    Comentario? comment = context.Comment.FirstOrDefault(x => x.OngId == ongId);
-    try
-    {
-        return Results.Ok(context.Comment.ToList());
-    }
-    catch (Exception)
-    {
-        throw new Exception("Erro");
-    }
+    var comments = context.Comment.Where(x => x.OngId == ongId).ToList();
+    return Results.Ok(comments);
 });
 
 app.MapGet("/comment/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
-    Comentario? comment = context.Comment.FirstOrDefault(x => x.Id == id);
-    try
+    var comment = context.Comment.FirstOrDefault(x => x.Id == id);
+    if (comment == null)
     {
-        return Results.Ok(context.Comment.FirstOrDefault());
+        return Results.NotFound();
     }
-    catch (System.Exception)
-    {
-        
-        throw new Exception("Comentario não encontrado");
-    }
+    return Results.Ok(comment);
 });
 
 app.MapDelete("/comment/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) =>{
-    Comentario? comment = context.Comment.FirstOrDefault(x => x.Id == id);
-    try
+    var comment = context.Comment.FirstOrDefault(x => x.Id == id);
+    if (comment == null)
     {
-        context.Comment.Remove(comment);
-        context.SaveChanges();
-        return Results.Created("", comment);
+        return Results.NotFound();
     }
-    catch (System.Exception)
-    {
-        throw new Exception("Comentario não encontrado");
-    }
+
+    context.Comment.Remove(comment);
+    context.SaveChanges();
+    return Results.NoContent();
 });
 
 //Fim das rotas de Comment

@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PetEsperanca.Models
@@ -14,12 +13,9 @@ namespace PetEsperanca.Models
         [RegularExpression(@"^\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}$", ErrorMessage = "Formato de CNPJ inválido.")]
         public required string Cnpj { get; set; }
 
-        public Comentario[] Comentarios { get; set; } = new Comentario[0];
-
-        public Voluntario[] Voluntarios { get; set; } = new Voluntario[0];
-
-        public Evento[] Eventos { get; set; } = new Evento[0];
-
-        public Endereco[] Enderecos { get; set; } = new Endereco[0];
+        public List<Comentario> Comentarios { get; set; } = new List<Comentario>();
+        public List<Voluntario> Voluntarios {get; set;} = new List<Voluntario>();
+        public List<Evento> Eventos {get; set;} = new List<Evento>();
+        public List<Endereco> Enderecos {get; set;} = new List<Endereco>();
     }
 }
