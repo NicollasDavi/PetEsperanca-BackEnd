@@ -45,7 +45,7 @@ app.MapPost("/signin", ([FromBody]Ong ong,[FromServices] AppDbContext context) =
     }
 });
 
-app.MapPut("/ong/update/{id}", ([FromRoute] Guid id, [FromBody] Ong newOng, [FromServices] AppDbContext context) =>
+app.MapPatch("/ong/update/{id}", ([FromRoute] Guid id, [FromBody] Ong newOng, [FromServices] AppDbContext context) =>
 {
     Ong? ong = context.Ong.FirstOrDefault(x => x.Id == id);
 
@@ -120,12 +120,12 @@ app.MapDelete("/user/{id}", ([FromRoute] int id, [FromServices] AppDbContext con
 
 //Inicio das rotas de Comment
 
-app.MapPost("/comment" , ([FromBody] Comentario comentario, [FromServices] AppDbContext context) => {
+app.MapPost("/comment" , ([FromBody] Comentario comment, [FromServices] AppDbContext context) => {
     try
     {
-        context.Comment.Add(comentario);
+        context.Comment.Add(comment);
         context.SaveChanges();
-        return Results.Created("", comentario);
+        return Results.Created("", comment);
     }
     catch (Exception)
     {
@@ -141,20 +141,35 @@ app.MapGet("/comments/{ongId}", ([FromRoute] Guid ongId, [FromServices] AppDbCon
     }
     catch (Exception)
     {
-        return StatusCodes(404, "Não encontrado");
+        throw new Exception("Erro");
     }
 });
 
 app.MapGet("/comment/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
-    
+    Comentario? comment = context.Comment.FirstOrDefault(x => x.Id == id);
+    try
+    {
+        return Results.Ok(context.Comment.FirstOrDefault());
+    }
+    catch (System.Exception)
+    {
+        
+        throw new Exception("Comentario não encontrado");
+    }
 });
 
-app.MapPut("/comment/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
-
-});
-
-app.MapDelete("/comment/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) =>{
-
+app.MapDelete("/comment/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) =>{
+    Comentario? comment = context.Comment.FirstOrDefault(x => x.Id == id);
+    try
+    {
+        context.Comment.Remove(comment);
+        context.SaveChanges();
+        return Results.Created("", comment);
+    }
+    catch (System.Exception)
+    {
+        throw new Exception("Comentario não encontrado");
+    }
 });
 
 //Fim das rotas de Comment
