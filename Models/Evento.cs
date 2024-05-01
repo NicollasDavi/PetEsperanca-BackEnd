@@ -13,7 +13,7 @@ public class Evento{
 
     public required decimal ValorDesejado {get; set;}
 
-    public required decimal ValorAlcançado {get; set;}
+    public required decimal ValorAlcancado {get; set;}
 
     public required int NumeroDeDoacao {get; set;}
 }
