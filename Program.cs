@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using PetEsperanca.Models;
 
@@ -119,15 +120,36 @@ app.MapDelete("/user/{id}", ([FromRoute] int id, [FromServices] AppDbContext con
 
 //Inicio das rotas de Comment
 
-app.MapPost("/comment" , ([FromBody] User user, [FromServices] AppDbContext context) => {
-    
+app.MapPost("/comment" , ([FromBody] Comentario comentario, [FromServices] AppDbContext context) => {
+    try
+    {
+        context.Comment.Add(comentario);
+        context.SaveChanges();
+        return Results.Created("", comentario);
+    }
+    catch (Exception)
+    {
+        throw new Exception("Erro");
+    }
+});
+
+app.MapGet("/comments/{ongId}", ([FromRoute] Guid ongId, [FromServices] AppDbContext context) => {
+    Comentario? comment = context.Comment.FirstOrDefault(x => x.OngId == ongId);
+    try
+    {
+        return Results.Ok(context.Comment.ToList());
+    }
+    catch (Exception)
+    {
+        return StatusCodes(404, "Não encontrado");
+    }
 });
 
 app.MapGet("/comment/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
-
+    
 });
 
-app.MapPut("/comment/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) => {
+app.MapPut("/comment/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
 
 });
 
