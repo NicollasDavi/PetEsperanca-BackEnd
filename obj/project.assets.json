@@ -2944,11 +2944,16 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\Marti\\.nuget\\packages\\": {}
+=======
+    "C:\\Users\\nicollas\\.nuget\\packages\\": {}
+>>>>>>> a5b042c2b3b66b483025de35abd92db15d672ddb
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Marti\\Desktop\\petGit\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
       "projectName": "PetEsperancaProject",
       "projectPath": "C:\\Users\\Marti\\Desktop\\petGit\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
@@ -2957,6 +2962,16 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+      "projectUniqueName": "C:\\Users\\nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
+      "projectName": "PetEsperancaProject",
+      "projectPath": "C:\\Users\\nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
+      "packagesPath": "C:\\Users\\nicollas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\nicollas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> a5b042c2b3b66b483025de35abd92db15d672ddb
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3029,8 +3044,20 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+>>>>>>> a5b042c2b3b66b483025de35abd92db15d672ddb
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problema ao ler o arquivo de cache C:\\Users\\nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\obj\\project.nuget.cache: Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
