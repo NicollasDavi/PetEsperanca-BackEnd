@@ -16,4 +16,18 @@ public class Evento{
     public required decimal ValorAlcancado {get; set;}
 
     public required int NumeroDeDoacao {get; set;}
+
+    public void RegrasNegocio(){
+        if (DataInicio < DateTime.UtcNow.ToOADate())
+        {
+            throw new InvalidOperationException ("Data de início deve ser uma data atual ou futura.");
+        }
+        if (ValorAlcancado >= ValorDesejado) {
+            Console.WriteLine("Parabéns por atingir ou ultrapassar a meta!");
+        }
+        if (ValorDesejado < 0 || ValorAlcancado < 0 || NumeroDeDoacao < 0) {
+            throw new InvalidOperationException("Valores não podem ser negativos.");
+        }
+        
+    }
 }

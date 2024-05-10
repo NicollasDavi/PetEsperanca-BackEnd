@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using PetEsperanca.Models;
+using PetEsperanca.Services;
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +16,10 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pet Esperança API", Version = "v1" });
 });
+
+builder.Services.AddHttpClient<ViaCEPService>();
+builder.Services.AddScoped<ViaCEPService>();
+
 
 var app = builder.Build();
 
@@ -158,7 +166,7 @@ app.MapGet("/comment/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext co
     }
 });
 
-app.MapDelete("/comment/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) =>{
+app.MapDelete("/comment/delete{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) =>{
     Comentario? comment = context.Comment.FirstOrDefault(x => x.Id == id);
     try
     {
@@ -176,9 +184,8 @@ app.MapDelete("/comment/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext
 
 //Incio das rotas de Events
 
-// Esta rota permite criar um novo evento (ONG) com base nos dados fornecidos no corpo da requisição.
-// Adiciona a ONG ao banco de dados, salva as alterações e retorna o evento criado com uma URL de referência.
-app.MapPost("/event", async ([FromBody] Ong ong, [FromServices] AppDbContext context) => {
+
+app.MapPost("/event/cadastrar", async ([FromBody] Ong ong, [FromServices] AppDbContext context) => {
     try {
         context.Ong.Add(ong);
         context.SaveChanges();
@@ -188,9 +195,8 @@ app.MapPost("/event", async ([FromBody] Ong ong, [FromServices] AppDbContext con
     }
 });
 
-// Esta rota permite buscar um evento pelo nome.
-// Se o evento com o nome fornecido for encontrado, ele é retornado na resposta. Caso contrário, retorna 404 Not Found.
-app.MapGet("/event/{nome}", ([FromRoute] string nome, [FromServices] AppDbContext context) => {
+
+app.MapGet("/event/buscar{nome}", ([FromRoute] string nome, [FromServices] AppDbContext context) => {
     var evento = context.Evento.FirstOrDefault(e => e.Nome == nome);
     if (evento == null) {
         return Results.NotFound();
@@ -198,11 +204,10 @@ app.MapGet("/event/{nome}", ([FromRoute] string nome, [FromServices] AppDbContex
     return Results.Ok(evento);
 });
 
-// Esta rota permite atualizar um evento existente com base no ID fornecido.
-// Se o evento for encontrado, suas propriedades são atualizadas com os dados fornecidos no corpo da requisição.
-// As alterações são salvas no banco de dados e o evento atualizado é retornado na resposta.
-app.MapPatch("/event/{id}", async ([FromRoute] Guid id, [FromBody] Evento updatedEvent, [FromServices] AppDbContext context) => {
-    var evento = await context.Evento.FindAsync(id);
+
+
+app.MapPatch("/event/atualizar{id}", async ([FromRoute] Guid id, [FromBody] Evento updatedEvent, [FromServices] AppDbContext context) => {
+    var evento =  context.Evento.Find(id);
     if (evento == null) {
         return Results.NotFound();
     }
@@ -216,11 +221,9 @@ app.MapPatch("/event/{id}", async ([FromRoute] Guid id, [FromBody] Evento update
     return Results.Ok(evento);
 });
 
-// Esta rota permite substituir um evento existente com base no ID fornecido.
-// Se o evento for encontrado, todas as suas propriedades são substituídas com os dados fornecidos no corpo da requisição.
-// As alterações são salvas no banco de dados e o evento atualizado é retornado na resposta.
-app.MapPut("/event/{id}", async ([FromRoute] int id, [FromBody] Evento updatedEvent, [FromServices] AppDbContext context) => {
-    var evento = await context.Evento.FindAsync(id);
+
+app.MapPut("/event/alterar{id}", async ([FromRoute] int id, [FromBody] Evento updatedEvent, [FromServices] AppDbContext context) => {
+    var evento = await context.Evento.FindAsync(id); //tirar
     if (evento == null) {
         return Results.NotFound();
     }
@@ -234,11 +237,10 @@ app.MapPut("/event/{id}", async ([FromRoute] int id, [FromBody] Evento updatedEv
     return Results.Ok(evento);
 });
 
-// Esta rota permite excluir um evento existente com base no ID fornecido.
-// Se o evento for encontrado, ele é removido do banco de dados e as alterações são salvas.
-// Retorna uma resposta 204 No Content para indicar que a operação foi concluída com sucesso.
-app.MapDelete("/event/{id}", async ([FromRoute] int id, [FromServices] AppDbContext context) => {
-    var evento = await context.Evento.FindAsync(id);
+
+
+app.MapDelete("/event/deletar{id}", async ([FromRoute] int id, [FromServices] AppDbContext context) => {
+    var evento =  context.Evento.Find(id); 
     if (evento == null) {
         return Results.NotFound();
     }
@@ -251,24 +253,88 @@ app.MapDelete("/event/{id}", async ([FromRoute] int id, [FromServices] AppDbCont
 
 //Incio das rotas de Voluntario
 
-app.MapPost("/voluntario" , ([FromBody] User user, [FromServices] AppDbContext context) => {
+app.MapPost("/voluntario/cadastrar" , ([FromBody] User user, [FromServices] AppDbContext context) => {
+     try {
+        Voluntario voluntario = new Voluntario
+            {
+                userId = "12345",
+                OngId = "67890",
+                voluntarioId = "abcde"
+            };
+        context.Voluntario.Add(voluntario);
+        context.SaveChanges();
+
+        return Results.Created($"/volutario/{voluntario.voluntarioId}", voluntario);
+    } catch (Exception ex) {
+        throw new Exception($"Erro ao mostra voluntario: {ex.Message}");
+    }
+});
+
+app.MapGet("/voluntario/buscar{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
+    Voluntario? voluntario = context.Voluntario.Find(id);
+    if (voluntario is null)
+    {
+        return Results.NotFound("Voluntario nao encontrado!");
+    }
+    return Results.Ok(voluntario);
+
+});
+
+app.MapPatch("/voluntario/atualizar/{id}", ([FromRoute] Guid id, [FromBody] Voluntario voluntarioAtualizado, [FromServices] AppDbContext context) => {
     
+    Voluntario? voluntario = context.Voluntario.FirstOrDefault(v => v.voluntarioId == id.ToString());
+
+    
+    if (voluntario == null) {
+        return Results.NotFound("Voluntário não encontrado!");
+    }
+
+    if (voluntarioAtualizado.userId != null) {
+        voluntario.userId = voluntarioAtualizado.userId;
+    }
+    if (voluntarioAtualizado.OngId != null) {
+        voluntario.OngId = voluntarioAtualizado.OngId;
+    }
+    if (voluntarioAtualizado.HorasTrabalhadas != null) {
+        voluntario.HorasTrabalhadas = voluntarioAtualizado.HorasTrabalhadas;
+    }
+
+    // Salvar as alterações
+    context.SaveChanges();
+
+    // Retornar o recurso atualizado
+    return Results.Ok(voluntario);
 });
 
-app.MapGet("/voluntario/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
 
+app.MapPut("/voluntario/alterar/completo/{id}", ([FromRoute] int id, [FromBody] Voluntario voluntarioAtualizado, [FromServices] AppDbContext context) => {
+    
+    Voluntario? voluntario = context.Voluntario.FirstOrDefault(v => v.voluntarioId == id.ToString());
+    
+    if (voluntario == null) {
+        return Results.NotFound("Voluntário não encontrado!");
+    }
+    
+    voluntario.userId = voluntarioAtualizado.userId;
+    voluntario.OngId = voluntarioAtualizado.OngId;
+    voluntario.HorasTrabalhadas = voluntarioAtualizado.HorasTrabalhadas;
+    voluntario.voluntarioId = voluntarioAtualizado.voluntarioId;
+    
+    context.SaveChanges();
+    
+    return Results.Ok(voluntario);
 });
 
-app.MapPatch("/voluntario/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
 
-});
-
-app.MapPut("/voluntario/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) => {
-
-});
-
-app.MapDelete("/voluntario/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) =>{
-
+app.MapDelete("/voluntario/deletar{id}", ([FromRoute] int id, [FromServices] AppDbContext context) =>{
+    Voluntario? voluntario = context.Voluntario.Find(id);
+    if (voluntario is null)
+    {
+        return Results.NotFound("voluntario não encontrado!");
+    }
+    context.Voluntario.Remove(voluntario);
+    context.SaveChanges();
+    return Results.Ok("Produto deletado!");
 });
 
 //Fim das rotas de Voluntario
