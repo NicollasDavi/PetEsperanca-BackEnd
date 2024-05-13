@@ -183,7 +183,7 @@ app.MapPost("/event/cadastrar", async ([FromBody] Ong ong, [FromServices] AppDbC
 });
 
 
-app.MapGet("/event/buscar{nome}", ([FromRoute] string nome, [FromServices] AppDbContext context) => {
+app.MapGet("/event/buscar/{nome}", ([FromRoute] string nome, [FromServices] AppDbContext context) => {
     var evento = context.Evento.FirstOrDefault(e => e.Nome == nome);
     if (evento == null) {
         return Results.NotFound();
@@ -240,63 +240,51 @@ app.MapDelete("/event/deletar{id}", async ([FromRoute] int id, [FromServices] Ap
 
 //Incio das rotas de Voluntario
 
-app.MapPost("/voluntario/cadastrar" , ([FromBody] User user, [FromServices] AppDbContext context) => {
-     try {
-        Voluntario voluntario = new Voluntario
-            {
-                userId = "12345",
-                OngId = "67890",
-                voluntarioId = "abcde"
-            };
-        context.Voluntario.Add(voluntario);
+app.MapPost("/voluntario/{id}/{ongid}", ([FromRoute] string id, [FromRoute] string ongid, [FromServices] AppDbContext context) => {
+    try {
+        Ong ong = context.Ong.Find(ongId);
+        if (ong == null) {
+            return Results.NotFound("Ong não encontrada");
+        }
+        Voluntario voluntario = context.User.Find(id);
+        if (voluntario == null) {
+            return Results.NotFound("Voluntário não encontrado");
+        }
+        if (ong.Voluntarios.Any(x => x.Id == voluntario.Id)) {
+            return Results.BadRequest("O voluntário já pertence a essa Ong");
+        }
+        ong.Voluntarios.Add(voluntario);
         context.SaveChanges();
-
-        return Results.Created($"/volutario/{voluntario.voluntarioId}", voluntario);
+        return Results.Created($"/voluntario/{voluntario.Id}", voluntario);
     } catch (Exception ex) {
-        throw new Exception($"Erro ao mostra voluntario: {ex.Message}");
+        return Results.BadRequest($"Erro ao adicionar voluntário: {ex.Message}");
     }
 });
 
-app.MapGet("/voluntario/buscar{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
-    Voluntario? voluntario = context.Voluntario.Find(id);
-    if (voluntario is null)
-    {
-        return Results.NotFound("Voluntario nao encontrado!");
-    }
-    return Results.Ok(voluntario);
-
+app.MapGet("/voluntario/{id}", async ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
+    var voluntario = await context.Voluntario.FindAsync(id);
+    return voluntario != null ? Results.Ok(voluntario) : Results.NotFound("Voluntário não encontrado");
 });
 
-app.MapPatch("/voluntario/atualizar/{id}", ([FromRoute] Guid id, [FromBody] Voluntario voluntarioAtualizado, [FromServices] AppDbContext context) => {
-    
-    Voluntario? voluntario = context.Voluntario.FirstOrDefault(v => v.voluntarioId == id.ToString());
-
+app.MapPatch("/voluntario/atualizar/{id}", async ([FromRoute] Guid id, [FromBody] Voluntario voluntarioAtualizado, [FromServices] AppDbContext context) => {
+    var voluntario = await context.Voluntario.FindAsync(id);
     
     if (voluntario == null) {
         return Results.NotFound("Voluntário não encontrado!");
     }
 
-    if (voluntarioAtualizado.userId != null) {
-        voluntario.userId = voluntarioAtualizado.userId;
-    }
-    if (voluntarioAtualizado.OngId != null) {
-        voluntario.OngId = voluntarioAtualizado.OngId;
-    }
-    if (voluntarioAtualizado.HorasTrabalhadas != null) {
-        voluntario.HorasTrabalhadas = voluntarioAtualizado.HorasTrabalhadas;
-    }
+    voluntario.userId = voluntarioAtualizado.userId ?? voluntario.userId;
+    voluntario.OngId = voluntarioAtualizado.OngId ?? voluntario.OngId;
+    voluntario.HorasTrabalhadas = voluntarioAtualizado.HorasTrabalhadas ?? voluntario.HorasTrabalhadas;
 
-    // Salvar as alterações
-    context.SaveChanges();
+    await context.SaveChangesAsync();
 
-    // Retornar o recurso atualizado
     return Results.Ok(voluntario);
 });
 
 
-app.MapPut("/voluntario/alterar/completo/{id}", ([FromRoute] int id, [FromBody] Voluntario voluntarioAtualizado, [FromServices] AppDbContext context) => {
-    
-    Voluntario? voluntario = context.Voluntario.FirstOrDefault(v => v.voluntarioId == id.ToString());
+app.MapPut("/voluntario/alterar/completo/{id}", async ([FromRoute] int id, [FromBody] Voluntario voluntarioAtualizado, [FromServices] AppDbContext context) => {
+    var voluntario = await context.Voluntario.FindAsync(id);
     
     if (voluntario == null) {
         return Results.NotFound("Voluntário não encontrado!");
@@ -307,24 +295,28 @@ app.MapPut("/voluntario/alterar/completo/{id}", ([FromRoute] int id, [FromBody] 
     voluntario.HorasTrabalhadas = voluntarioAtualizado.HorasTrabalhadas;
     voluntario.voluntarioId = voluntarioAtualizado.voluntarioId;
     
-    context.SaveChanges();
+    await context.SaveChangesAsync();
     
     return Results.Ok(voluntario);
 });
 
 
-app.MapDelete("/voluntario/deletar{id}", ([FromRoute] int id, [FromServices] AppDbContext context) =>{
-    Voluntario? voluntario = context.Voluntario.Find(id);
-    if (voluntario is null)
-    {
-        return Results.NotFound("voluntario não encontrado!");
+
+app.MapDelete("/voluntario/deletar/{id}", async ([FromRoute] int id, [FromServices] AppDbContext context) => {
+    var voluntario = await context.Voluntario.FindAsync(id);
+    
+    if (voluntario == null) {
+        return Results.NotFound("Voluntário não encontrado!");
     }
+    
     context.Voluntario.Remove(voluntario);
-    context.SaveChanges();
-    return Results.Ok("Produto deletado!");
+    
+    await context.SaveChangesAsync();
+    
+    return Results.Ok("Voluntário deletado!");
 });
 
-//Fim das rotas de Voluntario
+
 
 
 app.Run();

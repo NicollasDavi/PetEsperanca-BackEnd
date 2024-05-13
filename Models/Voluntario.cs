@@ -1,14 +1,16 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace PetEsperanca.Models;
 
 public class Voluntario{
 
-    public required String userId {get;set;}
+    [Key]
+    public required Guid voluntarioId{get;set;}
 
-    public required String OngId{get;set;}
+    public required string userId {get;set;}
+
+    public required string OngId{get;set;}
 
     public Double HorasTrabalhadas{get;set;}
-
-    public required String voluntarioId{get;set;}
-
     }
 

@@ -7,7 +7,6 @@ namespace PetEsperanca.Models
     public DbSet<Evento> Evento { get; set; }
     public DbSet<Comentario> Comment { get; set; }
     public DbSet<Voluntario> Voluntario { get; set; }
-    public DbSet<Endereco> Endereco {get; set;}
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder.UseSqlite("Data Source=PetDb.db");
