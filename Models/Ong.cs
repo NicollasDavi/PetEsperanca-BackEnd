@@ -15,7 +15,7 @@ namespace PetEsperanca.Models
 
         public ICollection<Comentario> Comentario { get; set;} = new List<Comentario>();
         public ICollection<Voluntario> Voluntarios {get; set;} = new List<Voluntario>();
-        // public List<Evento> Eventos {get; set;} = new List<Evento>();
-        // public List<Endereco> Enderecos {get; set;} = new List<Endereco>();
+        public List<Evento> Eventos {get; set;} = new List<Evento>();
+        public List<Endereco> Enderecos {get; set;} = new List<Endereco>();
     }
 }

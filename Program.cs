@@ -172,58 +172,83 @@ app.MapGet("/comment/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext co
 //Incio das rotas de Events
 
 
-app.MapPost("/event/cadastrar", async ([FromBody] Ong ong, [FromServices] AppDbContext context) => {
+app.MapPost("/event/cadastrar", async ([FromBody] Event evento, [FromServices] AppDbContext context) => {
     try {
-        context.Ong.Add(ong);
-        context.SaveChanges();
-        return Results.Created($"/event/{ong.Id}", ong);
+        Ong ong = await context.Ong.FindAsync(evento.ONGid);
+        if (ong == null) {
+            return Results.NotFound("ONG não encontrada.");
+        }
+        context.Event.Add(evento);
+
+        ong.Eventos.Add(evento);
+
+        await context.SaveChangesAsync();
+
+        return Results.Created($"/event/{evento.Id}", evento);
     } catch (Exception ex) {
         throw new Exception($"Erro ao criar evento: {ex.Message}");
     }
 });
 
 
+
 app.MapGet("/event/buscar/{nome}", ([FromRoute] string nome, [FromServices] AppDbContext context) => {
-    var evento = context.Evento.FirstOrDefault(e => e.Nome == nome);
-    if (evento == null) {
-        return Results.NotFound();
+    var eventos = context.Evento.Where(e => e.Nome.ToLower() == nome.ToLower()).ToList();
+
+    if (eventos.Count == 0) {
+        return Results.NotFound($"Nenhum evento encontrado com o nome '{nome}'.");
     }
-    return Results.Ok(evento);
+
+    return Results.Ok(eventos);
 });
 
 
 
-app.MapPatch("/event/atualizar{id}", async ([FromRoute] Guid id, [FromBody] Evento updatedEvent, [FromServices] AppDbContext context) => {
-    var evento =  context.Evento.Find(id);
-    if (evento == null) {
-        return Results.NotFound();
+app.MapPatch("/event/atualizar/{id}", async ([FromRoute] Guid id, [FromBody] Evento updatedEvent, [FromServices] AppDbContext context) => {
+    try {
+        var evento = context.Evento.Find(id);
+        if (evento == null) {
+            return Results.NotFound();
+        }
+
+        evento.Nome = updatedEvent.Nome;
+        evento.DataInicio = updatedEvent.DataInicio;
+        evento.Objetivo = updatedEvent.Objetivo;
+        evento.ValorDesejado = updatedEvent.ValorDesejado;
+        evento.ValorAlcancado = updatedEvent.ValorAlcancado;
+        evento.NumeroDeDoacao = updatedEvent.NumeroDeDoacao;
+
+        await context.SaveChangesAsync();
+
+        return Results.Ok(evento);
+    } catch (Exception ex) {
+        return Results.BadRequest($"Erro ao atualizar evento: {ex.Message}");
     }
-    evento.Nome = updatedEvent.Nome;
-    evento.DataInicio = updatedEvent.DataInicio;
-    evento.Objetivo = updatedEvent.Objetivo;
-    evento.ValorDesejado = updatedEvent.ValorDesejado;
-    evento.ValorAlcancado = updatedEvent.ValorAlcancado;
-    evento.NumeroDeDoacao = updatedEvent.NumeroDeDoacao;
-    await context.SaveChangesAsync();
-    return Results.Ok(evento);
 });
 
 
-app.MapPut("/event/alterar{id}", async ([FromRoute] int id, [FromBody] Evento updatedEvent, [FromServices] AppDbContext context) => {
-    var evento = await context.Evento.FindAsync(id); //tirar
-    if (evento == null) {
-        return Results.NotFound();
-    }
-    evento.Nome = updatedEvent.Nome;
-    evento.DataInicio = updatedEvent.DataInicio;
-    evento.Objetivo = updatedEvent.Objetivo;
-    evento.ValorDesejado = updatedEvent.ValorDesejado;
-    evento.ValorAlcancado = updatedEvent.ValorAlcancado;
-    evento.NumeroDeDoacao = updatedEvent.NumeroDeDoacao;
-    await context.SaveChangesAsync();
-    return Results.Ok(evento);
-});
 
+app.MapPut("/event/alterar/{id}", async ([FromRoute] int id, [FromBody] Evento updatedEvent, [FromServices] AppDbContext context) => {
+    try {
+        var evento = await context.Evento.FindAsync(id);
+        if (evento == null) {
+            return Results.NotFound();
+        }
+
+        evento.Nome = updatedEvent.Nome;
+        evento.DataInicio = updatedEvent.DataInicio;
+        evento.Objetivo = updatedEvent.Objetivo;
+        evento.ValorDesejado = updatedEvent.ValorDesejado;
+        evento.ValorAlcancado = updatedEvent.ValorAlcancado;
+        evento.NumeroDeDoacao = updatedEvent.NumeroDeDoacao;
+
+        await context.SaveChangesAsync();
+
+        return Results.Ok(evento);
+    } catch (Exception ex) {
+        return Results.BadRequest($"Erro ao atualizar evento: {ex.Message}");
+    }
+});
 
 
 app.MapDelete("/event/deletar{id}", async ([FromRoute] int id, [FromServices] AppDbContext context) => {
