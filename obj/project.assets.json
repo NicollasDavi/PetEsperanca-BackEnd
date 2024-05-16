@@ -2944,24 +2944,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\105404\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\nicollas\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\105404\\Documents\\GitHub\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
+      "projectUniqueName": "C:\\Users\\nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
       "projectName": "PetEsperancaProject",
-      "projectPath": "C:\\Users\\105404\\Documents\\GitHub\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
-      "packagesPath": "C:\\Users\\105404\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\105404\\Documents\\GitHub\\PetEsperanca-BackEnd\\obj\\",
+      "projectPath": "C:\\Users\\nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
+      "packagesPath": "C:\\Users\\nicollas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\105404\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\nicollas\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

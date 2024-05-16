@@ -172,13 +172,13 @@ app.MapGet("/comment/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext co
 //Incio das rotas de Events
 
 
-app.MapPost("/event/cadastrar", async ([FromBody] Event evento, [FromServices] AppDbContext context) => {
+app.MapPost("/event/cadastrar", async ([FromBody] Evento evento, [FromServices] AppDbContext context) => {
     try {
-        Ong ong = await context.Ong.FindAsync(evento.ONGid);
+        Ong? ong = context.Ong.Find(evento.ONGid);
         if (ong == null) {
             return Results.NotFound("ONG não encontrada.");
         }
-        context.Event.Add(evento);
+        context.Evento.Add(evento);
 
         ong.Eventos.Add(evento);
 
@@ -267,20 +267,21 @@ app.MapDelete("/event/deletar{id}", async ([FromRoute] int id, [FromServices] Ap
 
 app.MapPost("/voluntario/{id}/{ongid}", ([FromRoute] string id, [FromRoute] string ongid, [FromServices] AppDbContext context) => {
     try {
-        Ong ong = context.Ong.Find(ongId);
+        Ong? ong = context.Ong.Find(ongid);
         if (ong == null) {
             return Results.NotFound("Ong não encontrada");
         }
-        Voluntario voluntario = context.User.Find(id);
+        Voluntario voluntario= new Voluntario();
+        voluntario = context.User.Find(id);
         if (voluntario == null) {
             return Results.NotFound("Voluntário não encontrado");
         }
-        if (ong.Voluntarios.Any(x => x.Id == voluntario.Id)) {
+        if (ong.Voluntarios.Any(x => x.voluntarioId == voluntario.voluntarioId)) {
             return Results.BadRequest("O voluntário já pertence a essa Ong");
         }
         ong.Voluntarios.Add(voluntario);
         context.SaveChanges();
-        return Results.Created($"/voluntario/{voluntario.Id}", voluntario);
+        return Results.Created($"/voluntario/{voluntario.voluntarioId}", voluntario);
     } catch (Exception ex) {
         return Results.BadRequest($"Erro ao adicionar voluntário: {ex.Message}");
     }
@@ -300,7 +301,7 @@ app.MapPatch("/voluntario/atualizar/{id}", async ([FromRoute] Guid id, [FromBody
 
     voluntario.userId = voluntarioAtualizado.userId ?? voluntario.userId;
     voluntario.OngId = voluntarioAtualizado.OngId ?? voluntario.OngId;
-    voluntario.HorasTrabalhadas = voluntarioAtualizado.HorasTrabalhadas ?? voluntario.HorasTrabalhadas;
+    voluntario.HorasTrabalhadas = voluntarioAtualizado.HorasTrabalhadas + voluntario.HorasTrabalhadas;
 
     await context.SaveChangesAsync();
 
