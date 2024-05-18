@@ -105,23 +105,76 @@ app.MapDelete("/ong/delete/{id}", ([FromRoute] Guid id, [FromServices] AppDbCont
 //Inicio das Rodas de  User
 
 app.MapPost("/sigin/user" , ([FromBody] User user, [FromServices] AppDbContext context) => {
-    
+     try
+    {
+        context.User.Add(user);
+        context.SaveChanges();
+        return Results.Created("", user);
+    }
+    catch (Exception)
+    {
+        throw new Exception("Erro");
+    }
 });
 
 app.MapGet("/user/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
-
+    var user = context.User.FirstOrDefault(x => x.Id == id);
+    if (user == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(user);
 });
 
-app.MapPatch("/user/{id}", ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
+app.MapPatch("/user/{id}", async([FromRoute] Guid id,[FromBody] User updatedUser, [FromServices] AppDbContext context) => {
+    try {
+        var user = context.User.Find(id);
+        if (user == null) {
+            return Results.NotFound();
+        }
 
+        user.Name = updatedUser.Name;
+        user.Cpf = updatedUser.Cpf;
+        user.Tel = updatedUser.Tel;
+        user.Email = updatedUser.Email;
+     
+
+        await context.SaveChangesAsync();
+
+        return Results.Ok(user);
+    } catch (Exception ex) {
+        return Results.BadRequest($"Erro ao atualizar usuário: {ex.Message}");
+    }
 });
 
-app.MapPut("/user/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) => {
+app.MapPut("/user/{id}", async ([FromRoute] int id,[FromBody] User updatedUser, [FromServices] AppDbContext context) => {
+    try {
+        var user = await context.User.FindAsync(id);
+        if (user == null) {
+            return Results.NotFound();
+        }
 
+        user.Name = updatedUser.Name;
+        user.Cpf = updatedUser.Cpf;
+        user.Tel = updatedUser.Tel;
+        user.Email = updatedUser.Email;
+
+        await context.SaveChangesAsync();
+
+        return Results.Ok(user);
+    } catch (Exception ex) {
+        return Results.BadRequest($"Erro ao atualizar usuário: {ex.Message}");
+    }
 });
 
-app.MapDelete("/user/{id}", ([FromRoute] int id, [FromServices] AppDbContext context) =>{
-
+app.MapDelete("/user/{id}", async ([FromRoute] int id, [FromServices] AppDbContext context) =>{
+     var user =  context.User.Find(id); 
+    if (user == null) {
+        return Results.NotFound();
+    }
+    context.User.Remove(user);
+    await context.SaveChangesAsync();
+    return Results.NoContent();
 });
 
 //Fim das Rotas de User
