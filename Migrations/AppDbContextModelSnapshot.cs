@@ -38,58 +38,14 @@ namespace PetEsperancaProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OngId");
-
                     b.ToTable("Comment");
-                });
-
-            modelBuilder.Entity("PetEsperanca.Models.Endereco", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Bairro")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CEP")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Cidade")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Complemento")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Estado")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Numero")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Pais")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Rua")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Endereco");
                 });
 
             modelBuilder.Entity("PetEsperanca.Models.Evento", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<double>("DataInicio")
                         .HasColumnType("REAL");
@@ -168,37 +124,45 @@ namespace PetEsperancaProject.Migrations
 
             modelBuilder.Entity("PetEsperanca.Models.Voluntario", b =>
                 {
-                    b.Property<string>("voluntarioId")
+                    b.Property<Guid>("VoluntarioId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<double>("HorasTrabalhadas")
                         .HasColumnType("REAL");
 
-                    b.Property<string>("OngId")
-                        .IsRequired()
+                    b.Property<Guid>("OngId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("userId")
-                        .IsRequired()
+                    b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("voluntarioId");
+                    b.HasKey("VoluntarioId");
+
+                    b.HasIndex("OngId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Voluntario");
                 });
 
-            modelBuilder.Entity("PetEsperanca.Models.Comentario", b =>
+            modelBuilder.Entity("PetEsperanca.Models.Voluntario", b =>
                 {
-                    b.HasOne("PetEsperanca.Models.Ong", null)
-                        .WithMany("Comentario")
+                    b.HasOne("PetEsperanca.Models.Ong", "Ong")
+                        .WithMany()
                         .HasForeignKey("OngId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("PetEsperanca.Models.Ong", b =>
-                {
-                    b.Navigation("Comentario");
+                    b.HasOne("PetEsperanca.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ong");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
