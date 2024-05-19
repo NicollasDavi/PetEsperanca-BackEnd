@@ -512,3 +512,7 @@ C:\Users\105404\Documents\GitHub\PetEsperanca-BackEnd\obj\Debug\net8.0\refint\Pe
 C:\Users\105404\Documents\GitHub\PetEsperanca-BackEnd\obj\Debug\net8.0\PetEsperancaProject.pdb
 C:\Users\105404\Documents\GitHub\PetEsperanca-BackEnd\obj\Debug\net8.0\PetEsperancaProject.genruntimeconfig.cache
 C:\Users\105404\Documents\GitHub\PetEsperanca-BackEnd\obj\Debug\net8.0\ref\PetEsperancaProject.dll
+C:\Users\Marti\Desktop\petGit\PetEsperanca-BackEnd\bin\Debug\net8.0\System.Net.Http.Formatting.dll
+C:\Users\Marti\Desktop\petGit\PetEsperanca-BackEnd\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\Marti\Desktop\petGit\PetEsperanca-BackEnd\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+C:\Users\Marti\Desktop\petGit\PetEsperanca-BackEnd\bin\Debug\net8.0\ViaCep.dll
