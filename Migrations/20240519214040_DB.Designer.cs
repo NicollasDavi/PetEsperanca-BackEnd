@@ -11,8 +11,8 @@ using PetEsperanca.Models;
 namespace PetEsperancaProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240519210033_carai5")]
-    partial class carai5
+    [Migration("20240519214040_DB")]
+    partial class DB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

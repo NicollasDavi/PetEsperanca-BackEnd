@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using PetEsperanca.Models;
+using PetEsperanca.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pet Esperança API", Version = "v1" });
 });
+
 
 
 var app = builder.Build();
@@ -31,11 +34,7 @@ app.MapGet("/list/ong", async ([FromServices] AppDbContext context) =>
     return Results.Ok(ongs);
 });
 
-<<<<<<< HEAD
 app.MapPost("/signin", async ([FromBody] Ong ong, [FromServices] AppDbContext context) =>
-=======
-app.MapPost("/signin", ([FromBody] Ong ong, [FromServices] AppDbContext context) =>
->>>>>>> 7ac2a19e5475333002445772188082ff3c0d33a3
 {
     try
     {
@@ -45,11 +44,7 @@ app.MapPost("/signin", ([FromBody] Ong ong, [FromServices] AppDbContext context)
     }
     catch (Exception)
     {
-<<<<<<< HEAD
         return Results.Problem("Erro ao cadastrar ONG.");
-=======
-        return Results.Problem("Erro ao salvar a ONG", statusCode: 500);
->>>>>>> 7ac2a19e5475333002445772188082ff3c0d33a3
     }
 });
 
@@ -70,11 +65,7 @@ app.MapPatch("/ong/update/{id}", async ([FromRoute] Guid id, [FromBody] Ong newO
     }
     catch (Exception)
     {
-<<<<<<< HEAD
         return Results.Problem("Erro ao atualizar ONG.");
-=======
-        return Results.Problem("Erro ao atualizar a ONG", statusCode: 500);
->>>>>>> 7ac2a19e5475333002445772188082ff3c0d33a3
     }
 });
 
@@ -84,11 +75,7 @@ app.MapDelete("/ong/delete/{id}", async ([FromRoute] Guid id, [FromServices] App
 
     if (ong == null)
     {
-<<<<<<< HEAD
         return Results.NotFound("ONG não encontrada.");
-=======
-        return Results.NotFound("Ong não encontrada");
->>>>>>> 7ac2a19e5475333002445772188082ff3c0d33a3
     }
 
     try
@@ -99,11 +86,7 @@ app.MapDelete("/ong/delete/{id}", async ([FromRoute] Guid id, [FromServices] App
     }
     catch (Exception)
     {
-<<<<<<< HEAD
         return Results.Problem("Erro ao deletar ONG.");
-=======
-        return Results.Problem("Erro ao deletar a ONG", statusCode: 500);
->>>>>>> 7ac2a19e5475333002445772188082ff3c0d33a3
     }
 });
 
@@ -111,14 +94,9 @@ app.MapDelete("/ong/delete/{id}", async ([FromRoute] Guid id, [FromServices] App
 
 // Início das rotas de User
 
-<<<<<<< HEAD
 app.MapPost("/signin/user", async ([FromBody] User user, [FromServices] AppDbContext context) =>
 {
     try
-=======
-app.MapPost("/create/user" , ([FromBody] User user, [FromServices] AppDbContext context) => {
-     try
->>>>>>> 7ac2a19e5475333002445772188082ff3c0d33a3
     {
         context.User.Add(user);
         await context.SaveChangesAsync();
@@ -247,11 +225,6 @@ app.MapPost("/event/cadastrar", async ([FromBody] Evento evento, [FromServices] 
         }
 
         context.Evento.Add(evento);
-<<<<<<< HEAD
-        ong.Eventos.Add(evento);
-=======
-
->>>>>>> 7ac2a19e5475333002445772188082ff3c0d33a3
         await context.SaveChangesAsync();
 
         return Results.Created($"/event/{evento.Id}", evento);
@@ -312,72 +285,6 @@ app.MapDelete("/event/deletar/{id}", async ([FromRoute] Guid id, [FromServices] 
 
 // Início das rotas de Voluntario
 
-<<<<<<< HEAD
-app.MapPost("/voluntario/{id}/{ongid}", async ([FromRoute] Guid id, [FromRoute] Guid ongid, [FromServices] AppDbContext context) =>
-{
-    try
-    {
-        var ong = await context.Ong.FindAsync(ongid);
-        if (ong == null)
-        {
-            return Results.NotFound("ONG não encontrada.");
-        }
-
-        var voluntario = await context.User.FindAsync(id);
-        if (voluntario == null)
-        {
-            return Results.NotFound("Voluntário não encontrado.");
-        }
-
-        if (ong.Voluntarios.Any(x => x.voluntarioId == voluntario.Id))
-        {
-            return Results.BadRequest("O voluntário já pertence a essa ONG.");
-        }
-
-        
-        await context.SaveChangesAsync();
-        return Results.Created($"/voluntario/{voluntario.Id}", voluntario);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Erro ao adicionar voluntário: {ex.Message}");
-    }
-});
-
-app.MapGet("/voluntario/{id}", async ([FromRoute] Guid id, [FromServices] AppDbContext context) =>
-{
-    var voluntario = await context.Voluntario.FindAsync(id);
-    return voluntario != null ? Results.Ok(voluntario) : Results.NotFound("Voluntário não encontrado.");
-});
-
-app.MapPatch("/voluntario/atualizar/{id}", async ([FromRoute] Guid id, [FromBody] Voluntario voluntarioAtualizado, [FromServices] AppDbContext context) =>
-{
-    var voluntario = await context.Voluntario.FindAsync(id);
-    if (voluntario == null)
-    {
-        return Results.NotFound("Voluntário não encontrado.");
-    }
-
-    voluntario.userId = voluntarioAtualizado.userId ?? voluntario.userId;
-    voluntario.OngId = voluntarioAtualizado.OngId ?? voluntario.OngId;
-    voluntario.HorasTrabalhadas = voluntarioAtualizado.HorasTrabalhadas + voluntario.HorasTrabalhadas;
-
-    await context.SaveChangesAsync();
-
-    return Results.Ok(voluntario);
-});
-
-app.MapPut("/voluntario/alterar/completo/{id}", async ([FromRoute] Guid id, [FromBody] Voluntario voluntarioAtualizado, [FromServices] AppDbContext context) =>
-{
-    var voluntario = await context.Voluntario.FindAsync(id);
-    if (voluntario == null)
-    {
-        return Results.NotFound("Voluntário não encontrado.");
-    }
-
-    voluntario.userId = voluntarioAtualizado.userId;
-    voluntario.OngId = voluntarioAtualizado.OngId;
-=======
 // Adiciona um voluntário
 // Adiciona um voluntário
 app.MapPost("/voluntario/{id}/{ongid}", async ([FromRoute] string id, [FromRoute] string ongid, [FromServices] AppDbContext context) => {
@@ -413,7 +320,6 @@ app.MapPatch("/voluntario/{id}", async ([FromRoute] Guid id, [FromBody] Voluntar
 
     voluntario.UserId = voluntarioAtualizado.UserId != Guid.Empty ? voluntarioAtualizado.UserId : voluntario.UserId;
     voluntario.OngId = voluntarioAtualizado.OngId != Guid.Empty ? voluntarioAtualizado.OngId : voluntario.OngId;
->>>>>>> 7ac2a19e5475333002445772188082ff3c0d33a3
     voluntario.HorasTrabalhadas = voluntarioAtualizado.HorasTrabalhadas;
 
     await context.SaveChangesAsync();
@@ -421,48 +327,69 @@ app.MapPatch("/voluntario/{id}", async ([FromRoute] Guid id, [FromBody] Voluntar
     return Results.Ok(voluntario);
 });
 
-<<<<<<< HEAD
-app.MapDelete("/voluntario/deletar/{id}", async ([FromRoute] Guid id, [FromServices] AppDbContext context) =>
-{
-    var voluntario = await context.Voluntario.FindAsync(id);
-    if (voluntario == null)
-    {
-        return Results.NotFound("Voluntário não encontrado.");
-=======
 // Deleta um voluntário
 app.MapDelete("/voluntario/{id}", async ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
     var voluntario = await context.Voluntario.FindAsync(id);
     
     if (voluntario == null) {
         return Results.NotFound("Voluntário não encontrado");
->>>>>>> 7ac2a19e5475333002445772188082ff3c0d33a3
     }
 
     context.Voluntario.Remove(voluntario);
     await context.SaveChangesAsync();
-<<<<<<< HEAD
 
     return Results.Ok("Voluntário deletado.");
 });
 
 //endpoint de teste ViaCep
 
-app.MapGet("/test-viacep/{cep}", async ([FromRoute] string cep, [FromServices] ViaCEPService viaCEPService) =>
+app.MapGet("/adress/{cep}/{id}", async (HttpContext context, string cep, string id) =>
 {
     try
     {
-        var address = await viaCEPService.GetAddressByCepAsync(cep);
-        return Results.Ok(address);
+        using var client = new HttpClient();
+
+        string url = $"https://viacep.com.br/ws/{cep}/json/";
+
+        HttpResponseMessage response = await client.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        dynamic? endereco = JsonConvert.DeserializeObject(responseBody);
+
+        if (endereco != null)
+        {
+            var novoEndereco = new Endereco
+            {
+                Id = Guid.NewGuid(),
+                OngId = Guid.Parse(id),
+                Cep = endereco.cep,
+                Logradouro = endereco.logradouro,
+                Complemento = endereco.complemento,
+                Bairro = endereco.bairro,
+                Localidade = endereco.localidade,
+                UF = endereco.uf
+            };
+
+            context.Response.StatusCode = 200;
+            await context.Response.WriteAsync("Detalhes do endereço foram obtidos com sucesso e processados.");
+        }
+        else
+        {
+            context.Response.StatusCode = 500;
+            await context.Response.WriteAsync("Erro ao obter os detalhes do endereço: Resposta nula.");
+        }
     }
-    catch (Exception ex)
+    catch (HttpRequestException e)
     {
-        return Results.Problem($"Erro ao buscar o endereço: {ex.Message}");
+        context.Response.StatusCode = 500;
+        await context.Response.WriteAsync("Erro ao fazer a requisição:\n");
+        await context.Response.WriteAsync(e.Message);
     }
-=======
-    
-    return Results.Ok("Voluntário deletado");
->>>>>>> 7ac2a19e5475333002445772188082ff3c0d33a3
 });
+
+
 
 
 app.Run();
