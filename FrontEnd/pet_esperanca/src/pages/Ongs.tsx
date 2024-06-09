@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Home = () => {
+const Ongs = () => {
   return (
     <div>
-      Home page
+      Ongs page
     </div>
   )
 }
 
-export default Home
+export default Ongs

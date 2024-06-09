@@ -1,11 +1,12 @@
 import React from 'react'
+import
 
-const Home = () => {
+const OngCard = () => {
   return (
     <div>
-      Home page
+      
     </div>
   )
 }
 
-export default Home
+export default OngCard

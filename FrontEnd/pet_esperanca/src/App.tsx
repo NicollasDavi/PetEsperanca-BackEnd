@@ -1,15 +1,21 @@
 import React from 'react';
-import './App.css';
 import Header from './components/Header';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import Home from './pages/Home';
+import Ongs from './pages/Ongs';
 
 function App() {
   return (
-    <div className="App">
+    <Router>
       <header className="App-header">
         <Header />
       </header>
-    </div>
+      <Routes>
+        <Route path='/home' element={<Home />}/>
+        <Route path='/ongs' element={<Ongs />}/>
+      </Routes>
+    </Router>
   );
 }
 
