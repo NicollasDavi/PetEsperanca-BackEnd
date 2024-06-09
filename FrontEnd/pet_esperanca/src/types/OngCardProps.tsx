@@ -1,3 +1,4 @@
 export interface OngCardProps{
-    nome: string
+    nome: string,
+    onDelete: () => (void)
 }

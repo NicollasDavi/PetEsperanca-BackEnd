@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jO7m5Dxft021OZPpVrtOP+xqJHrcvTYLlMrKfZJ8EfbI546yyj2JVQ0oRwqXTpo5GSKTx7uS3cv8r02E8p3tug==",
+  "dgSpecHash": "ImreAFQJ+JQfGkQhynACcW/5+UtbnKqr4UwSSIHfdF+hRtrxsk+PI7B7rywTpf6vFQ5TyJF7pVCzLyR1zAAndA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\PetEsperancaProject.csproj",
+  "projectFilePath": "C:\\Users\\nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\BackEnd\\PetEsperancaProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nicollas\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\nicollas\\.nuget\\packages\\microsoft.aspnet.webapi.client\\6.0.0\\microsoft.aspnet.webapi.client.6.0.0.nupkg.sha512",
@@ -62,12 +62,5 @@
     "C:\\Users\\nicollas\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\nicollas\\.nuget\\packages\\viacep\\4.1.495\\viacep.4.1.495.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problema ao ler o arquivo de cache C:\\Users\\nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\obj\\project.nuget.cache: Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

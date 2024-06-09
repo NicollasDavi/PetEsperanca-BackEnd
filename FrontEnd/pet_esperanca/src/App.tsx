@@ -3,7 +3,8 @@ import Header from './components/Header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Home from './pages/Home';
-import Ongs from './pages/Ongs';
+import Ongs from './pages/Ong/Ongs';
+import CreateOng from './pages/Ong/CreateOng';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/home' element={<Home />}/>
         <Route path='/ongs' element={<Ongs />}/>
+        <Route path='/newong' element={<CreateOng />}/>
       </Routes>
     </Router>
   );
