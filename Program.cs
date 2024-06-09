@@ -8,6 +8,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -26,7 +37,6 @@ app.UseSwaggerUI(c =>
 });
 
 // Início das rotas de Ong
-
 app.MapGet("/list/ong", async ([FromServices] AppDbContext context) =>
 {
     var ongs = await context.Ong.ToListAsync();
@@ -390,5 +400,5 @@ app.MapGet("/adress/{cep}/{id}", async (HttpContext context, string cep, string 
 
 
 
-
+app.UseCors("AllowAll");
 app.Run();
