@@ -5,7 +5,6 @@ import Button from '../../components/UI/Button'
 const Ongs = () => {
   return (
     <div>
-    <OngList/>
     <Button text='Create Ong' url='/newong' type='redirect'/>
     </div>
   )

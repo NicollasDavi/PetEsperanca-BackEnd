@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Ongs from './pages/Ong/Ongs';
 import CreateOng from './pages/Ong/CreateOng';
-
+import SignIn from './pages/SigIn/SigIn';
 function App() {
   return (
     <Router>
@@ -16,6 +16,7 @@ function App() {
         <Route path='/home' element={<Home />}/>
         <Route path='/ongs' element={<Ongs />}/>
         <Route path='/newong' element={<CreateOng />}/>
+        <Route path='/signin' element={<SignIn />}/>
       </Routes>
     </Router>
   );

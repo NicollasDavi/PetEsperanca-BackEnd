@@ -31,7 +31,7 @@ const CreateOng = () => {
     }, [erro])
 
   return (
-    <div>
+    <div className='container'>
         <section>
             <Input placeholder='Nome da Ong' setState={setOngName} state={ongName} type='text'/>
             <Input placeholder='Cnpj da Ong' setState={setCnpj} state={cnpj} type='text'/>

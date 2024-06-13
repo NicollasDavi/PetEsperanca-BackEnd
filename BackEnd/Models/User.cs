@@ -14,6 +14,8 @@ namespace PetEsperanca.Models
         [Required(ErrorMessage = "O CPF é obrigatório.")]
         public string Cpf { get; set; }
 
+        public string Senha { get; set; }
+
         [Required(ErrorMessage = "O telefone é obrigatório.")]
         public string Tel { get; set; }
 

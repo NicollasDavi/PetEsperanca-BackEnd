@@ -1,9 +1,10 @@
 import React from 'react'
+import OngList from '../components/OngList'
 
 const Home = () => {
   return (
     <div>
-      Home page
+        <OngList/>
     </div>
   )
 }

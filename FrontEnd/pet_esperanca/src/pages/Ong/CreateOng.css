@@ -3,3 +3,11 @@
     color: red;
     font-weight: bold;
 }
+
+.container{
+    margin-top: 50px;
+}
+
+.container section{
+    display: block;
+}

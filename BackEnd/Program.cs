@@ -43,7 +43,7 @@ app.MapGet("/list/ong", async ([FromServices] AppDbContext context) =>
     return Results.Ok(ongs);
 });
 
-app.MapPost("/signin", async ([FromBody] Ong ong, [FromServices] AppDbContext context) =>
+app.MapPost("/ong", async ([FromBody] Ong ong, [FromServices] AppDbContext context) =>
 {
     try
     {
@@ -103,7 +103,7 @@ app.MapDelete("/ong/delete/{id}", async ([FromRoute] Guid id, [FromServices] App
 
 // Início das rotas de User
 
-app.MapPost("/signin/user", async ([FromBody] User user, [FromServices] AppDbContext context) =>
+app.MapPost("/user", async ([FromBody] User user, [FromServices] AppDbContext context) =>
 {
     try
     {
@@ -221,80 +221,9 @@ app.MapDelete("/comment/{id}", async ([FromRoute] Guid id, [FromServices] AppDbC
 
 // Fim das rotas de Comment
 
-// Início das rotas de Events
-
-app.MapPost("/event/cadastrar", async ([FromBody] Evento evento, [FromServices] AppDbContext context) =>
-{
-    try
-    {
-        var ong = await context.Ong.FindAsync(evento.ONGid);
-        if (ong == null)
-        {
-            return Results.NotFound("ONG não encontrada.");
-        }
-
-        context.Evento.Add(evento);
-        await context.SaveChangesAsync();
-
-        return Results.Created($"/event/{evento.Id}", evento);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Erro ao criar evento: {ex.Message}");
-    }
-});
-
-app.MapGet("/event/buscar/{nome}", async ([FromRoute] string nome, [FromServices] AppDbContext context) =>
-{
-    var eventos = await context.Evento.Where(e => e.Nome.ToLower() == nome.ToLower()).ToListAsync();
-    return eventos.Any() ? Results.Ok(eventos) : Results.NotFound($"Nenhum evento encontrado com o nome '{nome}'.");
-});
-
-app.MapPatch("/event/atualizar/{id}", async ([FromRoute] Guid id, [FromBody] Evento updatedEvent, [FromServices] AppDbContext context) =>
-{
-    try
-    {
-        var evento = await context.Evento.FindAsync(id);
-        if (evento == null)
-        {
-            return Results.NotFound("Evento não encontrado.");
-        }
-
-        evento.Nome = updatedEvent.Nome;
-        evento.DataInicio = updatedEvent.DataInicio;
-        evento.Objetivo = updatedEvent.Objetivo;
-        evento.ValorDesejado = updatedEvent.ValorDesejado;
-        evento.ValorAlcancado = updatedEvent.ValorAlcancado;
-        evento.NumeroDeDoacao = updatedEvent.NumeroDeDoacao;
-
-        await context.SaveChangesAsync();
-
-        return Results.Ok(evento);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem($"Erro ao atualizar evento: {ex.Message}");
-    }
-});
-
-app.MapDelete("/event/deletar/{id}", async ([FromRoute] Guid id, [FromServices] AppDbContext context) =>
-{
-    var evento = await context.Evento.FindAsync(id);
-    if (evento == null)
-    {
-        return Results.NotFound("Evento não encontrado.");
-    }
-
-    context.Evento.Remove(evento);
-    await context.SaveChangesAsync();
-    return Results.NoContent();
-});
-
-// Fim das rotas de Events
 
 // Início das rotas de Voluntario
 
-// Adiciona um voluntário
 // Adiciona um voluntário
 app.MapPost("/voluntario/{id}/{ongid}", async ([FromRoute] string id, [FromRoute] string ongid, [FromServices] AppDbContext context) => {
     try {
@@ -350,53 +279,6 @@ app.MapDelete("/voluntario/{id}", async ([FromRoute] Guid id, [FromServices] App
     return Results.Ok("Voluntário deletado.");
 });
 
-//endpoint de teste ViaCep
-
-app.MapGet("/adress/{cep}/{id}", async (HttpContext context, string cep, string id) =>
-{
-    try
-    {
-        using var client = new HttpClient();
-
-        string url = $"https://viacep.com.br/ws/{cep}/json/";
-
-        HttpResponseMessage response = await client.GetAsync(url);
-        response.EnsureSuccessStatusCode();
-
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        dynamic? endereco = JsonConvert.DeserializeObject(responseBody);
-
-        if (endereco != null)
-        {
-            var novoEndereco = new Endereco
-            {
-                Id = Guid.NewGuid(),
-                OngId = Guid.Parse(id),
-                Cep = endereco.cep,
-                Logradouro = endereco.logradouro,
-                Complemento = endereco.complemento,
-                Bairro = endereco.bairro,
-                Localidade = endereco.localidade,
-                UF = endereco.uf
-            };
-
-            context.Response.StatusCode = 200;
-            await context.Response.WriteAsync("Detalhes do endereço foram obtidos com sucesso e processados.");
-        }
-        else
-        {
-            context.Response.StatusCode = 500;
-            await context.Response.WriteAsync("Erro ao obter os detalhes do endereço: Resposta nula.");
-        }
-    }
-    catch (HttpRequestException e)
-    {
-        context.Response.StatusCode = 500;
-        await context.Response.WriteAsync("Erro ao fazer a requisição:\n");
-        await context.Response.WriteAsync(e.Message);
-    }
-});
 
 
 

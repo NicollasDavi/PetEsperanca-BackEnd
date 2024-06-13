@@ -647,9 +647,9 @@ C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\BackEnd\obj\Debug\net8.0
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\BackEnd\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PetEsperancaProject.props
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\BackEnd\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\BackEnd\obj\Debug\net8.0\scopedcss\bundle\PetEsperancaProject.styles.css
-C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\BackEnd\obj\Debug\net8.0\PetEsper.38F2E84F.Up2Date
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\BackEnd\obj\Debug\net8.0\PetEsperancaProject.dll
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\BackEnd\obj\Debug\net8.0\refint\PetEsperancaProject.dll
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\BackEnd\obj\Debug\net8.0\PetEsperancaProject.pdb
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\BackEnd\obj\Debug\net8.0\PetEsperancaProject.genruntimeconfig.cache
 C:\Users\nicollas\Documents\GitHub\PetEsperanca-BackEnd\BackEnd\obj\Debug\net8.0\ref\PetEsperancaProject.dll
+C:\Users\Nicollas\Documents\GitHub\PetEsperanca-BackEnd\BAckEnd\obj\Debug\net8.0\PetEsperancaProject.csproj.CopyComplete

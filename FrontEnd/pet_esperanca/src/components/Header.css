@@ -1,0 +1,78 @@
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2E8B57;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.logo h1 {
+    margin-left: 5px;
+    font-size: 1.2em;
+    text-wrap: nowrap;
+}
+
+.linkContainer, .authContainer {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.linkContainer ul,
+.authContainer ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.linkContainer li,
+.authContainer li {
+    margin: 0 10px;
+    padding-top: 10%;
+}
+
+.linkContainer a,
+.authContainer a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color 0.3s;
+}
+
+.linkContainer a:hover,
+.authContainer a:hover {
+    color: #00ff00;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.search-bar input {
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+    outline: none;
+    width: 30vw;
+
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #2E8B57;
+    padding: 5px;
+}

@@ -1,20 +1,53 @@
-section{
+.ong-card {
+    display: flex;
+    align-items: center;
+    color: #000;
+    box-shadow: solid 2px #2E8B57;
+    border-radius: 14px;
+    margin: 10px;
+    padding: 10px;
+    width: 30vw;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.ong-card:hover {
+    transform: scale(1.02);
+}
+
+.ong-image {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+section {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    background-color:#2E8B57;
-    color: #fff;
-    border-radius: 14px;
-    width: 30vw;
-    margin-bottom: 20px;
-    margin-left: 10px;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.delete{
+section h1 {
+    flex-grow: 1;
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.delete {
     background-color: red;
-    font-size: 2em;
+    font-size: 1.5em;
     padding: 4px;
     border-radius: 50%;
     cursor: pointer;
+    transition: background-color 0.3s;
+    color: #fff;
+}
+
+.delete:hover {
+    background-color: darkred;
 }
