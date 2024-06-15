@@ -57,6 +57,24 @@ app.MapPost("/ong", async ([FromBody] Ong ong, [FromServices] AppDbContext conte
     }
 });
 
+app.MapGet("/ong/{id}", async ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
+    var ong = await context.Ong.FindAsync(id);
+
+     if (ong == null)
+    {
+        return Results.NotFound("ONG não encontrada.");
+    }
+
+    try
+    {
+        return Results.Ok(ong);
+    }
+    catch (Exception)
+    {
+        return Results.Problem("Erro ao encontrar ONG.");
+    }
+});
+
 app.MapPatch("/ong/update/{id}", async ([FromRoute] Guid id, [FromBody] Ong newOng, [FromServices] AppDbContext context) =>
 {
     var ong = await context.Ong.FindAsync(id);

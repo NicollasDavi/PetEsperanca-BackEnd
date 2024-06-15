@@ -20,17 +20,18 @@ const SignIn = () => {
     } 
     e.preventDefault();
     if(isCadastro){
+     
       const newUSer = {
-        Name: nome,
-        Email: email,
-        Cpf: cpf,
-        Tel: telefone,
-        Senha: password
+        name: nome,
+        email: email,
+        cpf: cpf,
+        tel: telefone,
+        senha: password
       }
-      axiosInstance.post("/sigin", newUSer).then((response) => {
-
+      axiosInstance.post("/user", newUSer).then((response) => {
+        console.log(response.data)
       }).catch((error) => {
-
+        console.log(error)
       })
     }else{
       const user = {
@@ -68,15 +69,6 @@ const SignIn = () => {
           />
         </div>
 
-        <div className='form-group'>
-          <label htmlFor='Tel'>Telefone:</label>
-          <input
-            type='telefone'
-            id='telefone'
-            value={telefone}
-            onChange={(e) => setTelefone(e.target.value)}
-          />
-        </div>
 
         <div className='form-group'>
           <label htmlFor='password'>Password:</label>
@@ -88,15 +80,27 @@ const SignIn = () => {
           />
         </div>
         {isCadastro && 
+          <>
+              <div className='form-group'>
+              <label htmlFor='cpf'>CPF:</label>
+              <input
+                type='tect'
+                id='cpf'
+                value={cpf}
+                onChange={(e) => setCpf(e.target.value)}
+              />
+            </div>
+
             <div className='form-group'>
-            <label htmlFor='cpf'>CPF:</label>
+            <label htmlFor='Tel'>Telefone:</label>
             <input
-              type='tect'
-              id='cpf'
-              value={cpf}
-              onChange={(e) => setCpf(e.target.value)}
+              type='telefone'
+              id='telefone'
+              value={telefone}
+              onChange={(e) => setTelefone(e.target.value)}
             />
-          </div>
+            </div>
+          </>
         }
         <button type='submit' className='submit-button'>{!isCadastro ? "Sign In" : "Cadastrar"}</button>
         <p onClick={() => setIsCadastro(!isCadastro)}>{isCadastro ? "Já é um voluntario? Entrar" : "Não é um voluntario? Cadastre-se"}</p>
