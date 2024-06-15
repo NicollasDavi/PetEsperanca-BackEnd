@@ -1,9 +1,15 @@
 import React from 'react';
-import { FaHandsHelping } from "react-icons/fa";
-import { FaSearch } from 'react-icons/fa';
+import { FaHandsHelping, FaSearch } from "react-icons/fa";
 import './Header.css';
+import { useSearch } from '../contexts/SearchContext';
 
 const Header = () => {
+  const { searchTerm, setSearchTerm } = useSearch();
+
+  const handleSearch = () => {
+    console.log('Pesquisar:', searchTerm);
+  };
+
   return (
     <div className='header-container'>
       <div className='logo'>
@@ -21,8 +27,13 @@ const Header = () => {
         </ul>
       </section>
       <div className='search-bar'>
-        <input type="text" placeholder="Search..." />
-        <button>
+        <input 
+          type="text" 
+          placeholder="Search..." 
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button onClick={handleSearch}>
           <FaSearch />
         </button>
       </div>

@@ -32,7 +32,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pet Esperança API V1");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pet Esperança API V2.4.1");
     c.RoutePrefix = string.Empty;
 });
 

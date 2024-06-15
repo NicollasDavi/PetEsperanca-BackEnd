@@ -1,8 +1,23 @@
 .button {
-    background-color:#2E8B57;
+    background-color: #2E8B57;
     color: #fff;
     border-radius: 14px;
     padding: 1rem 2rem;
-    text-shadow: none;
     cursor: pointer;
+    border: none;
+    margin: 0 10px 0 10px;
+    display: inline-block;
+    font-size: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+    transform: scale(1.04);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.5);
 }
