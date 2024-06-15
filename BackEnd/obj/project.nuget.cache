@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ClGp5vAysKUSR59PX5h7kGCcmYWEjvuRk2JnYrbYOY0/oeccX4yCjqwvyWki7PXpL3HjsiLZCV6RPhWGMRhRXg==",
+  "dgSpecHash": "wRXlmPybtaRzYwT7abJUkMsRGIFhZHjPaZNeq1XU4UyawMxsA7tVZNi7yryyeVfULF5dnxARjOMyyWwuW26y0g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\BAckEnd\\PetEsperancaProject.csproj",
+  "projectFilePath": "C:\\Users\\Nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\BackEnd\\PetEsperancaProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nicollas\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Nicollas\\.nuget\\packages\\microsoft.aspnet.webapi.client\\6.0.0\\microsoft.aspnet.webapi.client.6.0.0.nupkg.sha512",

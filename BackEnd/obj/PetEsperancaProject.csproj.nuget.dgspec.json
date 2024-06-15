@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\BAckEnd\\PetEsperancaProject.csproj": {}
+    "C:\\Users\\Nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\BackEnd\\PetEsperancaProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\BAckEnd\\PetEsperancaProject.csproj": {
+    "C:\\Users\\Nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\BackEnd\\PetEsperancaProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\BAckEnd\\PetEsperancaProject.csproj",
+        "projectUniqueName": "C:\\Users\\Nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\BackEnd\\PetEsperancaProject.csproj",
         "projectName": "PetEsperancaProject",
-        "projectPath": "C:\\Users\\Nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\BAckEnd\\PetEsperancaProject.csproj",
+        "projectPath": "C:\\Users\\Nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\BackEnd\\PetEsperancaProject.csproj",
         "packagesPath": "C:\\Users\\Nicollas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\BAckEnd\\obj\\",
+        "outputPath": "C:\\Users\\Nicollas\\Documents\\GitHub\\PetEsperanca-BackEnd\\BackEnd\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Nicollas\\AppData\\Roaming\\NuGet\\NuGet.Config",

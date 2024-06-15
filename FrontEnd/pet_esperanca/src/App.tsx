@@ -6,6 +6,9 @@ import Home from './pages/Home';
 import Ongs from './pages/Ong/Ongs';
 import CreateOng from './pages/Ong/CreateOng';
 import SignIn from './pages/SigIn/SigIn';
+import Ong from './pages/Ong/Ong';
+
+
 function App() {
   return (
     <Router>
@@ -17,6 +20,7 @@ function App() {
         <Route path='/ongs' element={<Ongs />}/>
         <Route path='/newong' element={<CreateOng />}/>
         <Route path='/signin' element={<SignIn />}/>
+        <Route path='/ong/:id' element={<Ong />}/>
       </Routes>
     </Router>
   );

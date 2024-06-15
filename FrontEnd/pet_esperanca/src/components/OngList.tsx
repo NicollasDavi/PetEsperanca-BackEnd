@@ -29,7 +29,7 @@ const OngList = () => {
   return (
     <div>
         {ongsList.map((ong, id) => (
-            <OngCard nome={ong.ongName} key={id} onDelete={() => handleDelete(ong.id)} imagemUrl=''/>
+            <OngCard nome={ong.ongName} key={id} onDelete={() => handleDelete(ong.id)} imagemUrl='' id={ong.id}/>
         ))}
     </div>
   )
