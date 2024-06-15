@@ -1,0 +1,35 @@
+.ong-apresentation {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    padding: 20px;
+}
+
+.ong-image-container{
+    padding: 10px;
+    background-color: #000;
+    border-radius: 14px;
+    margin: auto;
+    width: 50%;
+    height: 50vh;
+}
+
+.ong-daescription {
+    width: 50%;
+    padding-left: 20px;
+    height: 50vh;
+}
+
+.ong-daescription h1 {
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.ong-apresentation p {
+    font-size: 20px;
+}
+
+input {
+    width: 80%;
+    margin: auto;
+}
