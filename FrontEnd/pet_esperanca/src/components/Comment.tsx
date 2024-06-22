@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Comment.css';
 import { CommentProps } from '../types/CommentProps';
+import axiosInstance from '../services/axios/axiosInstance';
+
 
 const Comment = ({ initialText, onDelete } : CommentProps) => {
   const [isEditing, setIsEditing] = useState(false);

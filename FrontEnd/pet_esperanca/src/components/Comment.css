@@ -51,5 +51,19 @@
     outline: none;
     box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.5);
   }
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+textarea:focus {
+    border-color: #2E8B57;
+}
   
 

@@ -11,10 +11,7 @@ namespace PetEsperanca.Models
         [ForeignKey("OngId")]
         public Guid OngId { get; set; }
 
-        public Guid UserId { get; set; }
-
         public required string Comment { get; set; } 
 
-        public int Avaliacao { get; set; }
     }
 }

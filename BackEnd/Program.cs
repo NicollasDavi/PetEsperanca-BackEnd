@@ -87,6 +87,8 @@ app.MapPatch("/ong/update/{id}", async ([FromRoute] Guid id, [FromBody] Ong newO
     try
     {
         ong.OngName = newOng.OngName ?? ong.OngName;
+        ong.Sobre = newOng.Sobre ?? ong.Sobre;
+        ong.Image = newOng.Image ?? ong.Image;
         await context.SaveChangesAsync();
         return Results.Ok(ong);
     }
@@ -282,7 +284,6 @@ app.MapPatch("/voluntario/{id}", async ([FromRoute] Guid id, [FromBody] Voluntar
 
     return Results.Ok(voluntario);
 });
-
 // Deleta um voluntário
 app.MapDelete("/voluntario/{id}", async ([FromRoute] Guid id, [FromServices] AppDbContext context) => {
     var voluntario = await context.Voluntario.FindAsync(id);

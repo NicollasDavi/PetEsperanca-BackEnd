@@ -3,10 +3,12 @@ import OngCard from './OngCard';
 import axiosInstance from '../services/axios/axiosInstance';
 import { useSearch } from '../contexts/SearchContext';
 import './OngList.css'; 
+import { OngInterface } from '../types/OngInterface';
+
 
 const OngList = () => {
   const { searchTerm } = useSearch();
-  const [ongsList, setOngsList] = useState<{ ongName: string, id: string }[]>([]);
+  const [ongsList, setOngsList] = useState<OngInterface[]>([]);
 
   const fetchOngs = () => {
     axiosInstance.get('/list/ong').then((response) => {
@@ -43,7 +45,7 @@ const OngList = () => {
             nome={ong.ongName}
             key={index}
             onDelete={() => handleDelete(ong.id)}
-            imagemUrl=''
+            imagemUrl={ong.image}
             id={ong.id}
           />
         ))

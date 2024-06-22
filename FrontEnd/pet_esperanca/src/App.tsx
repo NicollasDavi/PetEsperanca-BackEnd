@@ -20,7 +20,7 @@ function App() {
         <Route path='/ongs' element={<Ongs />}/>
         <Route path='/newong' element={<CreateOng />}/>
         <Route path='/signin' element={<SignIn />}/>
-        <Route path='/ong/:id' element={<Ong />}/>
+        <Route path='/ong/:id/:action' element={<Ong />}/>
       </Routes>
     </Router>
   );
